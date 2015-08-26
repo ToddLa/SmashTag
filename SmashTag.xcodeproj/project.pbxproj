@@ -13,6 +13,13 @@
 		EF8541591B8A917A004F7BB0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF8541581B8A917A004F7BB0 /* Images.xcassets */; };
 		EF85415C1B8A917A004F7BB0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF85415A1B8A917A004F7BB0 /* LaunchScreen.xib */; };
 		EF8541681B8A917B004F7BB0 /* SmashTagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8541671B8A917B004F7BB0 /* SmashTagTests.swift */; };
+		EF8541721B8A926C004F7BB0 /* TweetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8541711B8A926C004F7BB0 /* TweetTableViewController.swift */; };
+		EF85417A1B8A93B7004F7BB0 /* MediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8541761B8A93B7004F7BB0 /* MediaItem.swift */; };
+		EF85417B1B8A93B7004F7BB0 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8541771B8A93B7004F7BB0 /* Tweet.swift */; };
+		EF85417C1B8A93B7004F7BB0 /* TwitterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8541781B8A93B7004F7BB0 /* TwitterRequest.swift */; };
+		EF85417D1B8A93B7004F7BB0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8541791B8A93B7004F7BB0 /* User.swift */; };
+		EF85417F1B8AA4FF004F7BB0 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF85417E1B8AA4FF004F7BB0 /* TweetCell.swift */; };
+		EFE7F9111B8BDDD600AFF0FF /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE7F9101B8BDDD600AFF0FF /* ImageCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +43,13 @@
 		EF8541611B8A917A004F7BB0 /* SmashTagTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmashTagTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF8541661B8A917B004F7BB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF8541671B8A917B004F7BB0 /* SmashTagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmashTagTests.swift; sourceTree = "<group>"; };
+		EF8541711B8A926C004F7BB0 /* TweetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewController.swift; sourceTree = "<group>"; };
+		EF8541761B8A93B7004F7BB0 /* MediaItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaItem.swift; sourceTree = "<group>"; };
+		EF8541771B8A93B7004F7BB0 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		EF8541781B8A93B7004F7BB0 /* TwitterRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterRequest.swift; sourceTree = "<group>"; };
+		EF8541791B8A93B7004F7BB0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		EF85417E1B8AA4FF004F7BB0 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
+		EFE7F9101B8BDDD600AFF0FF /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,11 +91,12 @@
 		EF85414E1B8A917A004F7BB0 /* SmashTag */ = {
 			isa = PBXGroup;
 			children = (
-				EF8541511B8A917A004F7BB0 /* AppDelegate.swift */,
 				EF8541531B8A917A004F7BB0 /* ViewController.swift */,
 				EF8541551B8A917A004F7BB0 /* Main.storyboard */,
-				EF8541581B8A917A004F7BB0 /* Images.xcassets */,
-				EF85415A1B8A917A004F7BB0 /* LaunchScreen.xib */,
+				EF85417E1B8AA4FF004F7BB0 /* TweetCell.swift */,
+				EFE7F9101B8BDDD600AFF0FF /* ImageCache.swift */,
+				EF8541711B8A926C004F7BB0 /* TweetTableViewController.swift */,
+				EF8541751B8A93B7004F7BB0 /* Twitter */,
 				EF85414F1B8A917A004F7BB0 /* Supporting Files */,
 			);
 			path = SmashTag;
@@ -90,6 +105,9 @@
 		EF85414F1B8A917A004F7BB0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EF85415A1B8A917A004F7BB0 /* LaunchScreen.xib */,
+				EF8541581B8A917A004F7BB0 /* Images.xcassets */,
+				EF8541511B8A917A004F7BB0 /* AppDelegate.swift */,
 				EF8541501B8A917A004F7BB0 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -110,6 +128,17 @@
 				EF8541661B8A917B004F7BB0 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EF8541751B8A93B7004F7BB0 /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+				EF8541761B8A93B7004F7BB0 /* MediaItem.swift */,
+				EF8541771B8A93B7004F7BB0 /* Tweet.swift */,
+				EF8541781B8A93B7004F7BB0 /* TwitterRequest.swift */,
+				EF8541791B8A93B7004F7BB0 /* User.swift */,
+			);
+			path = Twitter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,8 +241,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF8541721B8A926C004F7BB0 /* TweetTableViewController.swift in Sources */,
+				EF85417B1B8A93B7004F7BB0 /* Tweet.swift in Sources */,
+				EF85417A1B8A93B7004F7BB0 /* MediaItem.swift in Sources */,
+				EFE7F9111B8BDDD600AFF0FF /* ImageCache.swift in Sources */,
+				EF85417F1B8AA4FF004F7BB0 /* TweetCell.swift in Sources */,
 				EF8541541B8A917A004F7BB0 /* ViewController.swift in Sources */,
 				EF8541521B8A917A004F7BB0 /* AppDelegate.swift in Sources */,
+				EF85417C1B8A93B7004F7BB0 /* TwitterRequest.swift in Sources */,
+				EF85417D1B8A93B7004F7BB0 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +447,7 @@
 				EF85416D1B8A917B004F7BB0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EF85416E1B8A917B004F7BB0 /* Build configuration list for PBXNativeTarget "SmashTagTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +456,7 @@
 				EF8541701B8A917B004F7BB0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
