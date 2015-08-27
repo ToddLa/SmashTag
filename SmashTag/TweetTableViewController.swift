@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetTableViewController: UITableViewController, UITextFieldDelegate {
+class TweetTableViewController: UITableViewController, UITextFieldDelegate, UISearchBarDelegate {
 
     // MARK: - MODEL
     var tweets = [[Tweet]]()
@@ -19,6 +19,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         didSet {
             lastReq = nil
             searchTextField?.text = searchText
+            searchBar?.text = searchText
             tweets.removeAll()
             tableView.reloadData()
             doSearch()
@@ -26,6 +27,15 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     }
 
     // MARK: - Outlets
+    @IBOutlet weak var searchBar: UISearchBar! {
+        didSet {
+            searchBar.delegate = self
+            searchBar.text = searchText
+            searchBar.placeholder = "#Search"
+        }
+        
+    }
+    
     @IBOutlet weak var searchTextField: UITextField! {
         didSet {
             searchTextField.delegate = self
@@ -93,7 +103,35 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         }
         return true
     }
+    
+    // MARK - UISearchBarDelegate
 
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    func searchBarTextDidEndEditing(searchBar: UISearchBar){
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        println("searchBartextDidChange: \(searchText)")
+    }
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        println("searchBarSearchButtonClicked: \(searchBar.text)")
+        searchBar.resignFirstResponder()
+        searchText = searchBar.text
+    }
+    func searchBarBookmarkButtonClicked(searchBar: UISearchBar) {
+        println("searchBarBookmarkButtonClicked")
+    }
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        println("searchBarCancelButtonClicked")
+        searchBar.resignFirstResponder()
+        searchBar.text = searchText
+    }
+    func searchBarResultsListButtonClicked(searchBar: UISearchBar) {
+        println("searchBarResultsListButtonClicked")
+    }
+    
     // MARK: - Data Source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

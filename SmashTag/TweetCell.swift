@@ -23,38 +23,6 @@ private extension String {
     }
 }
 
-/*
-private extension UILabel {
-    func setColor(color:UIColor, range:NSRange) {
-        let text = NSMutableAttributedString(attributedString: self.attributedText)
-        text.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
-        self.attributedText = text
-    }
-    func setString(var str:String, range:NSRange) {
-        // convert string (truncate or padd) to be same length as passed range, so as not to invalidate other ranges.
-        let text = NSMutableAttributedString(attributedString: self.attributedText)
-        text.replaceCharactersInRange(range, withString: str.paddToLength(range.length))
-        self.attributedText = text
-    }
-}
-**/
-
-/**
-private extension UIImage {
-    func resize(size : CGSize) -> UIImage {
-        
-        let hasAlpha = false
-        UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, 0.0)
-        CGContextSetInterpolationQuality(UIGraphicsGetCurrentContext(), kCGInterpolationHigh)
-        self.drawInRect(CGRect(origin: CGPointZero, size: size))
-        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return scaledImage
-    }
-}
-**/
-
 class TweetCell: UITableViewCell {
 
     var tweet : Tweet? {
@@ -65,10 +33,11 @@ class TweetCell: UITableViewCell {
     
     // MARK: Private
 
-    @IBOutlet weak var leftImage: UIImageView!
-    @IBOutlet weak var leftText: UILabel!
-    @IBOutlet weak var headerText: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var bodyText: UILabel!
+    @IBOutlet weak var timeText: UILabel!
+    @IBOutlet weak var userNameText: UILabel!
+    @IBOutlet weak var screenNameText: UILabel!
     
     private struct Colors {
         static let ScreenName = UIColor.lightTextColor()
@@ -86,25 +55,24 @@ class TweetCell: UITableViewCell {
     }
 
     private func updateUI() {
-        leftImage?.image = nil
-        leftText?.text = nil
-        headerText?.text = nil
+        profileImage?.image = nil
+        timeText?.text = nil
+        userNameText?.text = nil
+        screenNameText?.text = nil
         bodyText?.text = nil
         
         if let tweet = tweet {
             println("UpdateUI: \(tweet)")
 
             // Name
-            headerText.text = "\(tweet.user.name) @\(tweet.user.screenName)"
-            var text = NSMutableAttributedString(attributedString: headerText.attributedText)
-            //text.addAttribute(NSForegroundColorAttributeName, value:Colors.ScreenName, range:index.nsrange)
-            headerText.attributedText = text
+            userNameText.text = tweet.user.name
+            screenNameText.text = "@\(tweet.user.screenName)"
             
             // Body
             bodyText.text = tweet.text
             
             // convert to attributed text and color items...
-            text = NSMutableAttributedString(attributedString: bodyText.attributedText)
+            var text = NSMutableAttributedString(attributedString: bodyText.attributedText)
             text.beginEditing()
             
             for index in tweet.userMentions {
@@ -127,55 +95,24 @@ class TweetCell: UITableViewCell {
             text.endEditing()
             bodyText.attributedText = text
 
-            
-//            for index in tweet.userMentions {
-//                bodyText.setColor(Colors.Mentions, range: index.nsrange)
-//            }
-//            for index in tweet.urls {
-//                bodyText.setColor(Colors.Urls, range: index.nsrange)
-//                bodyText.setString("[URL]", range: index.nsrange)
-//            }
-//            for index in tweet.hashtags {
-//                bodyText.setColor(Colors.Hashtags, range: index.nsrange)
-//            }
-//            for item in tweet.media {
-//                if let range = item.index?.nsrange {
-//                    bodyText.setColor(Colors.Media, range:range)
-//                    bodyText.setString("[MEDIA]", range:range)
-//                    //bodyText.setString("ABCDEFGHIJKLMNOPQRSTUVWXYZ", range:NSRange(location:0, length:3))
-//                }
-//            }
-            
-            
-/*
-            // Image
-            if let url = tweet.user.profileImageURL, data = NSData(contentsOfURL: url) {
-                //leftImage?.image = UIImage(data: data)
-                leftImage?.image = UIImage(data: data)?.resize(leftImage!.bounds.size)
-                leftImage.layer.cornerRadius = leftImage.bounds.size.width / 8.0
-                leftImage.layer.borderColor = UIColor.blackColor().CGColor
-                leftImage.layer.borderWidth = 2.0
-                leftImage.clipsToBounds = true
-            }
-*/
             // Image
             if let url = tweet.user.profileImageURL {
                 
-                let size = leftImage.bounds.size
+                let size = profileImage.bounds.size
                 
                 let image = ImageCache.loadImageUrl(url, size:size) { image in
                     assert(NSThread.isMainThread())
                     // only set the image if the tweet id matches, in case the cell gets reused!
                     if self.tweet?.id == tweet.id {
-                        self.leftImage?.image = image
+                        self.profileImage.image = image
                     }
                 }
                 
-                leftImage?.image = image
-                leftImage.layer.cornerRadius = size.width / 8.0
-                leftImage.layer.borderColor = Colors.ImageBorder.CGColor
-                leftImage.layer.borderWidth = 2.0
-                leftImage.clipsToBounds = true
+                profileImage.image = image
+                profileImage.layer.cornerRadius = size.width / 8.0
+                profileImage.layer.borderColor = Colors.ImageBorder.CGColor
+                profileImage.layer.borderWidth = 2.0
+                profileImage.clipsToBounds = true
             }
 
             // Date
@@ -190,7 +127,7 @@ class TweetCell: UITableViewCell {
                 df.dateStyle = .ShortStyle
                 df.timeStyle = .NoStyle
             }
-            leftText.text = df.stringFromDate(tweet.created)
+            timeText.text = df.stringFromDate(tweet.created)
         }
     }
 }
