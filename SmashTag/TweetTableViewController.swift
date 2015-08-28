@@ -74,6 +74,9 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UISe
                         self.tableView.reloadData()
                     }
                     self.refreshControl?.endRefreshing()
+                    if self.tweets.count > 0 {
+                        self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+                    }
                 }
             }
         } else {

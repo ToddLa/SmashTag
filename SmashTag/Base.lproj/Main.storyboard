@@ -14,10 +14,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" id="57r-UN-Qc1">
-                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="yfK-f1-0ih">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits" keyboardType="twitter"/>
+                            <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetCell" rowHeight="163" id="Fzj-Lk-zuO" customClass="TweetCell" customModule="SmashTag" customModuleProvider="target">
@@ -94,12 +94,12 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <outlet property="searchBar" destination="57r-UN-Qc1" id="Tu6-cG-8v3"/>
+                        <outlet property="searchBar" destination="yfK-f1-0ih" id="8kH-1i-rmF"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QIX-BW-Dhv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="478" y="120"/>
+            <point key="canvasLocation" x="1083" y="106"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EYC-N4-tEe">
