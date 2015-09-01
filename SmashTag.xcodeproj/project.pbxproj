@@ -20,6 +20,7 @@
 		EF85417D1B8A93B7004F7BB0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8541791B8A93B7004F7BB0 /* User.swift */; };
 		EF85417F1B8AA4FF004F7BB0 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF85417E1B8AA4FF004F7BB0 /* TweetCell.swift */; };
 		EFE7F9111B8BDDD600AFF0FF /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE7F9101B8BDDD600AFF0FF /* ImageCache.swift */; };
+		EFE7F9131B94CC5C00AFF0FF /* TweetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE7F9121B94CC5C00AFF0FF /* TweetDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		EF8541791B8A93B7004F7BB0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		EF85417E1B8AA4FF004F7BB0 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		EFE7F9101B8BDDD600AFF0FF /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		EFE7F9121B94CC5C00AFF0FF /* TweetDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 			children = (
 				EF8541531B8A917A004F7BB0 /* ViewController.swift */,
 				EF8541551B8A917A004F7BB0 /* Main.storyboard */,
+				EFE7F9121B94CC5C00AFF0FF /* TweetDetailViewController.swift */,
 				EF85417E1B8AA4FF004F7BB0 /* TweetCell.swift */,
 				EFE7F9101B8BDDD600AFF0FF /* ImageCache.swift */,
 				EF8541711B8A926C004F7BB0 /* TweetTableViewController.swift */,
@@ -250,6 +253,7 @@
 				EF8541521B8A917A004F7BB0 /* AppDelegate.swift in Sources */,
 				EF85417C1B8A93B7004F7BB0 /* TwitterRequest.swift in Sources */,
 				EF85417D1B8A93B7004F7BB0 /* User.swift in Sources */,
+				EFE7F9131B94CC5C00AFF0FF /* TweetDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -44,8 +44,10 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UISe
     }
 
     // MARK; Storyboard constants
+    
     private struct Storyboard {
         static let cellIdent = "TweetCell"
+        static let detailSegueIdent = "TweetDetailSegue"
     }
 
     // MARK: Search
@@ -54,7 +56,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UISe
     private var nextReq : TwitterRequest? {
         if lastReq == nil {
             if let searchText = searchText {
-                return TwitterRequest(search: searchText, count: 100)
+                return TwitterRequest(search: searchText, count: 500)
             }
         } else {
             return lastReq!.requestForNewer
@@ -64,6 +66,10 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UISe
 
     private func doSearch() {
         refreshControl?.beginRefreshing()
+        println(tableView.contentOffset)
+        if tableView.contentOffset.y <= 0.0 {
+            tableView.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: true)
+        }
 
         if let req = nextReq {
             req.fetchTweets { newTweets in
@@ -72,11 +78,10 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UISe
                         self.lastReq = req
                         self.tweets.insert(newTweets, atIndex: 0)
                         self.tableView.reloadData()
+                        self.title = self.searchText
                     }
                     self.refreshControl?.endRefreshing()
-                    if self.tweets.count > 0 {
-                        self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
-                    }
+                    if self.tweets.count > 0 {self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition:.Top, animated:true)}
                 }
             }
         } else {
@@ -97,6 +102,33 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate, UISe
         doSearch()
     }
 
+    // MARK - Segue
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        println("prepareForSegue: \(segue) \(segue.identifier) \(sender)")
+        
+        if let dest = (segue.destinationViewController as? UIViewController) ?? (segue.destinationViewController as? UINavigationController)?.topViewController {
+            println("destination: \(dest)")
+            if let cell = sender as? TweetCell {
+                println("cell: \(cell)")
+                let indexPath = tableView.indexPathForCell(cell)
+                println("indexPath: \(indexPath)")
+                
+                if segue.identifier == Storyboard.detailSegueIdent {
+                    if let dest = dest as? TweetDetailViewController {
+                        dest.tweet = cell.tweet
+                    }
+                }
+            }
+        }
+        
+        let vc = (segue.destinationViewController as? UIViewController) ?? (segue.destinationViewController as? UINavigationController)?.topViewController
+        
+        if let detail = (vc as? TweetDetailViewController) where segue.identifier == "" {
+            
+        }
+    }
+    
     // MARK - UITextFieldDelegate
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {

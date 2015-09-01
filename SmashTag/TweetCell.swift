@@ -30,7 +30,7 @@ class TweetCell: UITableViewCell {
             updateUI()
         }
     }
-    
+
     // MARK: Private
 
     @IBOutlet weak var profileImage: UIImageView!
@@ -55,19 +55,21 @@ class TweetCell: UITableViewCell {
     }
 
     private func updateUI() {
-        profileImage?.image = nil
-        timeText?.text = nil
-        userNameText?.text = nil
-        screenNameText?.text = nil
-        bodyText?.text = nil
-        
         if let tweet = tweet {
             println("UpdateUI: \(tweet)")
+            
+            // HACK - Fonts - NEED TO SET THESE HERE (INSTEAD OF STORYBOARD) TO GET DynamicText size to work (kind of...)
+            //userNameText.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+            //screenNameText.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+            //bodyText.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+            //timeText.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+            //self.setNeedsLayout()
+            // HACK
 
             // Name
             userNameText.text = tweet.user.name
             screenNameText.text = "@\(tweet.user.screenName)"
-            
+
             // Body
             bodyText.text = tweet.text
             
@@ -128,6 +130,12 @@ class TweetCell: UITableViewCell {
                 df.timeStyle = .NoStyle
             }
             timeText.text = df.stringFromDate(tweet.created)
+        } else {
+            profileImage?.image = nil
+            timeText?.text = nil
+            userNameText?.text = nil
+            screenNameText?.text = nil
+            bodyText?.text = nil
         }
     }
 }
