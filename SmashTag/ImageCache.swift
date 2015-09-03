@@ -9,19 +9,24 @@
 import Foundation
 import UIKit
 
-private extension UIImage {
-    func resize(size : CGSize) -> UIImage {
-        
-        let hasAlpha = false
-        UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, 0.0)
-        CGContextSetInterpolationQuality(UIGraphicsGetCurrentContext(), kCGInterpolationHigh)
-        self.drawInRect(CGRect(origin: CGPointZero, size: size))
-        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return scaledImage
+/**
+
+ImageCache
+
+cache of UIImages of a given size, all loading happens in the background.
+
+usage
+
+image = ImageCache.loadImageUrl(url, size, {image in 
+    /* this is called back after image is loaded, on main thread */
+    if image != nil {
     }
+})
+if image != nil {
+    /* image was in cache, callback will not be called */
 }
+
+*/
 
 class ImageCache {
     
@@ -33,17 +38,34 @@ class ImageCache {
     
     typealias ImageCallback = (UIImage?) -> Void
     
+    // class version of loadImageUrl
     class func loadImageUrl(url:NSURL, size:CGSize, asyncHandler:ImageCallback!) -> UIImage? {
         return sharedInstance().loadImageUrl(url, size: size, asyncHandler: asyncHandler)
     }
 
     // MARK: Private
-    private static let sharedCache = ImageCache()
-    //private var imageCache = [String:UIImage]()
+    private static let sharedCache = ImageCache()   // shared global instance
     private var imageCache = NSCache()
     private var imageCallbacks = [String:[ImageCallback]]()
+    
+    // create our own session based on defaultSessionConfiguration instead of using sharedSession, this way we get to use a conncurent queue, not serial queue
     private let session = NSURLSession(configuration:NSURLSessionConfiguration.defaultSessionConfiguration(), delegate:nil, delegateQueue:NSOperationQueue())
 
+   /** 
+    
+    loadImageUrl
+    
+    retrive image from cache of given size and return it immediatly
+    or load and scale it in the background and call handler later
+    
+    :param: url image url o load
+    :param: size  size requested
+    :param: asyncHandler handler called back on **main thread** with image scaled to size
+    
+    :returns: if image is cached image is returned immediatly and handler not called.  
+    :returns: if image is not in cache nil is returned and handler called later.
+    
+    */
     func loadImageUrl(url:NSURL, size:CGSize, asyncHandler:ImageCallback!) -> UIImage? {
         
         // this function is only safe to call on main thread
@@ -103,3 +125,23 @@ class ImageCache {
         return nil
     }
 }
+
+private extension UIImage {
+    func resize(var size : CGSize) -> UIImage {
+        
+        if size.width == 0 && size.height == 0 { return self }
+        if size.width == 0  {size.width = size.height * self.size.width / self.size.height}
+        if size.height == 0 {size.height = size.width * self.size.height / self.size.width}
+        
+        let hasAlpha = false
+        UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, 0.0)
+        CGContextSetInterpolationQuality(UIGraphicsGetCurrentContext(), kCGInterpolationHigh)
+        self.drawInRect(CGRect(origin: CGPointZero, size: size))
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return scaledImage
+    }
+}
+
+

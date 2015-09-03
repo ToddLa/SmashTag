@@ -93,12 +93,12 @@
 		EF85414E1B8A917A004F7BB0 /* SmashTag */ = {
 			isa = PBXGroup;
 			children = (
-				EF8541531B8A917A004F7BB0 /* ViewController.swift */,
 				EF8541551B8A917A004F7BB0 /* Main.storyboard */,
 				EFE7F9121B94CC5C00AFF0FF /* TweetDetailViewController.swift */,
 				EF85417E1B8AA4FF004F7BB0 /* TweetCell.swift */,
 				EFE7F9101B8BDDD600AFF0FF /* ImageCache.swift */,
 				EF8541711B8A926C004F7BB0 /* TweetTableViewController.swift */,
+				EF8541531B8A917A004F7BB0 /* ViewController.swift */,
 				EF8541751B8A93B7004F7BB0 /* Twitter */,
 				EF85414F1B8A917A004F7BB0 /* Supporting Files */,
 			);

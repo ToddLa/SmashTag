@@ -8,22 +8,9 @@
 
 import UIKit
 
-private extension String {
-    // convert string (truncate or padd) to be given length  (U+200B is ZERO WIDTH SPACE)
-    func paddToLength(length:Int, paddChar:Character = Character("\u{200B}")) -> String {
-        let n = length - count(self)
-        if n > 0 {
-            return self + String(count: n, repeatedValue: paddChar)
-        } else if n < 0 {
-            return prefix(self, length)
-        }
-        else {
-            return self
-        }
-    }
-}
-
 class TweetCell: UITableViewCell {
+
+    // MARK: Properties
 
     var tweet : Tweet? {
         didSet {
@@ -139,3 +126,20 @@ class TweetCell: UITableViewCell {
         }
     }
 }
+
+private extension String {
+    // convert string (truncate or padd) to be given length  (U+200B is ZERO WIDTH SPACE)
+    func paddToLength(length:Int, paddChar:Character = Character("\u{200B}")) -> String {
+        let n = length - count(self)
+        if n > 0 {
+            return self + String(count: n, repeatedValue: paddChar)
+        } else if n < 0 {
+            return prefix(self, length)
+        }
+        else {
+            return self
+        }
+    }
+}
+
+
